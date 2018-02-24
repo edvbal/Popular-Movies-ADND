@@ -1,4 +1,4 @@
-package com.example.edvblk.popularmoviesadnd;
+package com.example.edvblk.popularmoviesadnd.utils;
 
 import android.content.Context;
 import android.view.View;
@@ -7,12 +7,10 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
 
-class GlideImageLoader implements BaseImageLoader {
-    private final Context context;
+public class GlideImageLoader implements BaseImageLoader {
     private final RequestManager requestManager;
 
-    GlideImageLoader(Context context) {
-        this.context = context;
+    public GlideImageLoader(Context context) {
         requestManager = Glide.with(context);
     }
 
