@@ -10,12 +10,16 @@ import butterknife.ButterKnife;
 class MoviesViewHolder extends RecyclerView.ViewHolder {
     @BindView(R.id.imageView)
     ImageView imageView;
+    private final BaseImageLoader baseImageLoader;
 
-    public MoviesViewHolder(View itemView) {
+    public MoviesViewHolder(View itemView, BaseImageLoader baseImageLoader) {
         super(itemView);
+        this.baseImageLoader = baseImageLoader;
         ButterKnife.bind(this, itemView);
     }
 
     public void onBind(Movie movie) {
+        baseImageLoader.loadImageFromUrl(imageView, movie.getImageUrl()
+        );
     }
 }
