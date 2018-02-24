@@ -32,7 +32,7 @@ public class BaseApplication extends Application {
         return glideImageLoader;
     }
 
-    private static BaseImageLoader getImageLoader(Context context) {
+    public static BaseImageLoader getImageLoader(Context context) {
         return ((BaseApplication) context.getApplicationContext()).getImageLoarder();
     }
 
