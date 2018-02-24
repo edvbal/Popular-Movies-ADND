@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initRecycler() {
-        adapter = new MoviesAdapter(new GlideImageLoader(this));
+        adapter = new MoviesAdapter(BaseApplication.getImageLoader(this));
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
     }
