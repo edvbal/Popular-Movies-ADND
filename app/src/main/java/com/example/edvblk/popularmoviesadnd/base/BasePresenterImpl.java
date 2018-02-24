@@ -5,7 +5,7 @@ import android.support.annotation.Nullable;
 
 import com.example.edvblk.popularmoviesadnd.utils.ViewConsumer;
 
-class BasePresenterImpl<T> implements BasePresenter<T> {
+public class BasePresenterImpl<T> implements BasePresenter<T> {
     @Nullable
     private T view;
 
