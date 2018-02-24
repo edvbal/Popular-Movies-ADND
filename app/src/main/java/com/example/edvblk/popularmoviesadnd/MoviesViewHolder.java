@@ -4,7 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.example.edvblk.popularmoviesadnd.utils.BaseImageLoader;
+import com.example.edvblk.popularmoviesadnd.base.BaseImageLoader;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

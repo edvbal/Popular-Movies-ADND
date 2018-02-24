@@ -1,4 +1,4 @@
-package com.example.edvblk.popularmoviesadnd.utils;
+package com.example.edvblk.popularmoviesadnd.base;
 
 import android.view.View;
 

@@ -1,9 +1,8 @@
-package com.example.edvblk.popularmoviesadnd;
+package com.example.edvblk.popularmoviesadnd.base;
 
 import android.app.Application;
 import android.content.Context;
 
-import com.example.edvblk.popularmoviesadnd.utils.BaseImageLoader;
 import com.example.edvblk.popularmoviesadnd.utils.GlideImageLoader;
 import com.example.edvblk.popularmoviesadnd.utils.RetrofitFactory;
 

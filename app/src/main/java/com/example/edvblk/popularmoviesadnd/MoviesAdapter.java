@@ -5,7 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.edvblk.popularmoviesadnd.utils.BaseImageLoader;
+import com.example.edvblk.popularmoviesadnd.base.BaseImageLoader;
 
 import java.util.ArrayList;
 import java.util.List;

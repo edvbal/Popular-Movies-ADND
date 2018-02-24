@@ -1,6 +1,7 @@
 package com.example.edvblk.popularmoviesadnd.utils;
 
 import com.example.edvblk.popularmoviesadnd.BuildConfig;
+import com.example.edvblk.popularmoviesadnd.base.BaseFactory;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
