@@ -1,4 +1,4 @@
-package com.example.edvblk.popularmoviesadnd.utils;
+package com.example.edvblk.popularmoviesadnd;
 
 import com.example.edvblk.popularmoviesadnd.base.BasePresenter;
 
