@@ -25,6 +25,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         unbinder = ButterKnife.bind(this);
         initRecycler();
+        setFakeItems();
+    }
+
+    private void setFakeItems() {
         List<Movie> movies = Arrays.asList(
                 new Movie("https://media3.giphy.com/media/3oKIPvR5gGtrCXMzYY/200w.webp"),
                 new Movie("https://media3.giphy.com/media/xT1R9ChQiaw6XfDa48/200w.webp"));
