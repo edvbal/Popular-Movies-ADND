@@ -28,10 +28,15 @@ public class MoviesActivity extends AppCompatActivity implements View {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         unbinder = ButterKnife.bind(this);
+        initPresenter();
+        initRecycler();
+        presenter.onCreate();
+        setFakeItems();
+    }
+
+    private void initPresenter() {
         presenter = new MoviesPresenter();
         presenter.takeView(this);
-        initRecycler();
-        setFakeItems();
     }
 
     private void setFakeItems() {
