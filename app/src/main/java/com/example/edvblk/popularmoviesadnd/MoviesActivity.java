@@ -13,17 +13,23 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-public class MoviesActivity extends AppCompatActivity {
+import static com.example.edvblk.popularmoviesadnd.MainContract.Presenter;
+import static com.example.edvblk.popularmoviesadnd.MainContract.View;
+
+public class MoviesActivity extends AppCompatActivity implements View {
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
     private Unbinder unbinder;
     private MoviesAdapter adapter;
+    private Presenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         unbinder = ButterKnife.bind(this);
+        presenter = new MoviesPresenter();
+        presenter.takeView(this);
         initRecycler();
         setFakeItems();
     }
@@ -43,6 +49,7 @@ public class MoviesActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
+        presenter.dropView();
         unbinder.unbind();
         super.onDestroy();
     }
