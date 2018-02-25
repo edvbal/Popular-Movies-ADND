@@ -1,5 +1,7 @@
 package com.example.edvblk.popularmoviesadnd.utils;
 
+import android.support.annotation.NonNull;
+
 import com.example.edvblk.popularmoviesadnd.BuildConfig;
 import com.example.edvblk.popularmoviesadnd.base.BaseFactory;
 
@@ -24,10 +26,20 @@ public class RetrofitFactory implements BaseFactory<Retrofit> {
     }
 
     private OkHttpClient provideHttpClient() {
-        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor()
-                .setLevel(HttpLoggingInterceptor.Level.BODY);
         return new OkHttpClient.Builder()
-                .addInterceptor(interceptor)
+                .addInterceptor(getLoggingInterceptor())
+                .addInterceptor(getAuthorizationInterceptor())
                 .build();
+    }
+
+    @NonNull
+    private AuthorizationInterceptor getAuthorizationInterceptor() {
+        return new AuthorizationInterceptor();
+    }
+
+    @NonNull
+    private HttpLoggingInterceptor getLoggingInterceptor() {
+        return new HttpLoggingInterceptor()
+                .setLevel(HttpLoggingInterceptor.Level.BODY);
     }
 }
