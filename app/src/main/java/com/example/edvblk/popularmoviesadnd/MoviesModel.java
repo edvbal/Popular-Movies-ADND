@@ -1,7 +1,7 @@
 package com.example.edvblk.popularmoviesadnd;
 
-import com.example.edvblk.popularmoviesadnd.utils.MoviesResultResponse;
-import com.example.edvblk.popularmoviesadnd.utils.MoviesService;
+import com.example.edvblk.popularmoviesadnd.utils.network.MoviesResultResponse;
+import com.example.edvblk.popularmoviesadnd.utils.network.MoviesService;
 
 import java.util.List;
 

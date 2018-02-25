@@ -6,8 +6,8 @@ import android.support.v7.widget.RecyclerView;
 
 import com.example.edvblk.popularmoviesadnd.base.BaseApplication;
 import com.example.edvblk.popularmoviesadnd.base.BaseImageLoader;
-import com.example.edvblk.popularmoviesadnd.utils.MoviesService;
 import com.example.edvblk.popularmoviesadnd.utils.image.DefaultImageUrlProvider;
+import com.example.edvblk.popularmoviesadnd.utils.network.MoviesService;
 
 import java.util.List;
 
