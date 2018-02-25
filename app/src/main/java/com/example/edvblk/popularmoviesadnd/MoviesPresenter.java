@@ -2,6 +2,7 @@ package com.example.edvblk.popularmoviesadnd;
 
 import com.example.edvblk.popularmoviesadnd.base.BasePresenterImpl;
 
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.disposables.Disposables;
 
@@ -19,6 +20,13 @@ class MoviesPresenter extends BasePresenterImpl<MainContract.View>
 
     @Override
     public void onCreate() {
+        model.getMovies()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe((movies) -> onView(view -> {
+                    view.populateView(movies.getResult());
+                }), throwable -> {
+                    // empty
+                });
     }
 
     @Override

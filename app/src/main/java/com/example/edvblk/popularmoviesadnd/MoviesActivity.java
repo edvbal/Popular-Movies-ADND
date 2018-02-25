@@ -9,6 +9,8 @@ import com.example.edvblk.popularmoviesadnd.base.BaseImageLoader;
 import com.example.edvblk.popularmoviesadnd.utils.MoviesService;
 import com.example.edvblk.popularmoviesadnd.utils.image.DefaultImageUrlProvider;
 
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -55,6 +57,11 @@ public class MoviesActivity extends AppCompatActivity implements View {
     private void initRecycler() {
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
+    }
+
+    @Override
+    public void populateView(List<Movie> movies) {
+        adapter.setItems(movies);
     }
 
     @Override
