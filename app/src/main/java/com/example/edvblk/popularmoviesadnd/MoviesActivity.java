@@ -5,8 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 
 import com.example.edvblk.popularmoviesadnd.base.BaseApplication;
-import com.example.edvblk.popularmoviesadnd.base.BaseImageLoader;
 import com.example.edvblk.popularmoviesadnd.utils.image.DefaultImageUrlProvider;
+import com.example.edvblk.popularmoviesadnd.utils.image.GlideImageLoader;
 import com.example.edvblk.popularmoviesadnd.utils.network.MoviesService;
 
 import java.util.List;
@@ -48,10 +48,9 @@ public class MoviesActivity extends AppCompatActivity implements View {
     }
 
     private void initAdapter() {
-        BaseImageLoader imageLoader = BaseApplication.getImageLoader(this);
         int widthPixels = getResources().getDisplayMetrics().widthPixels;
         DefaultImageUrlProvider urlProvider = new DefaultImageUrlProvider(widthPixels);
-        adapter = new MoviesAdapter(imageLoader, urlProvider);
+        adapter = new MoviesAdapter(new GlideImageLoader(this), urlProvider);
     }
 
     private void initRecycler() {
