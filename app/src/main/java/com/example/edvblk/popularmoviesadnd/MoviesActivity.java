@@ -4,10 +4,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 
-import com.example.edvblk.popularmoviesadnd.base.BaseApplication;
 import com.example.edvblk.popularmoviesadnd.utils.image.DefaultImageUrlProvider;
 import com.example.edvblk.popularmoviesadnd.utils.image.GlideImageLoader;
-import com.example.edvblk.popularmoviesadnd.utils.network.MoviesService;
 
 import java.util.List;
 
@@ -41,9 +39,7 @@ public class MoviesActivity extends AppCompatActivity implements View {
     }
 
     private void initPresenter() {
-        MoviesService service = BaseApplication.getRetrofit(this).create(MoviesService.class);
-        MoviesModel model = new MoviesModel(service);
-        presenter = new MoviesPresenter(model);
+        presenter = new MoviesPresenterFactory().create(this);
         presenter.takeView(this);
     }
 
