@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 
+import com.example.edvblk.popularmoviesadnd.utils.ErrorProvider;
+import com.example.edvblk.popularmoviesadnd.utils.ErrorProviderImpl;
 import com.example.edvblk.popularmoviesadnd.utils.image.DefaultImageUrlProvider;
 import com.example.edvblk.popularmoviesadnd.utils.image.GlideImageLoader;
 
@@ -14,14 +16,14 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 import static com.example.edvblk.popularmoviesadnd.MainContract.Presenter;
-import static com.example.edvblk.popularmoviesadnd.MainContract.View;
 
-public class MoviesActivity extends AppCompatActivity implements View {
+public class MoviesActivity extends AppCompatActivity implements MainContract.View {
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
     private Unbinder unbinder;
     private MoviesAdapter adapter;
     private Presenter presenter;
+    private ErrorProvider errorProvider;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +35,7 @@ public class MoviesActivity extends AppCompatActivity implements View {
 
     private void initFields() {
         unbinder = ButterKnife.bind(this);
+        errorProvider = new ErrorProviderImpl(recyclerView);
         initPresenter();
         initAdapter();
         initRecycler();
@@ -58,6 +61,12 @@ public class MoviesActivity extends AppCompatActivity implements View {
     public void populateView(List<Movie> movies) {
         adapter.setItems(movies);
     }
+
+    @Override
+    public void showError(String errorMessage) {
+        errorProvider.showError(errorMessage);
+    }
+
 
     @Override
     protected void onDestroy() {

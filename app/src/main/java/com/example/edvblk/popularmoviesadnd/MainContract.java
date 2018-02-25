@@ -10,6 +10,8 @@ import io.reactivex.Single;
 public interface MainContract {
     interface View {
         void populateView(List<Movie> movies);
+
+        void showError(String errorMessage);
     }
 
     interface Presenter extends BasePresenter<View> {
