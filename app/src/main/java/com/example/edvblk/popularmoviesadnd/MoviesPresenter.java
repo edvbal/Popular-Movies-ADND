@@ -1,7 +1,7 @@
 package com.example.edvblk.popularmoviesadnd;
 
 import com.example.edvblk.popularmoviesadnd.base.BasePresenterImpl;
-import com.example.edvblk.popularmoviesadnd.utils.network.DefaultInternetChecker;
+import com.example.edvblk.popularmoviesadnd.utils.network.InternetChecker;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -13,12 +13,13 @@ import static com.example.edvblk.popularmoviesadnd.MainContract.Presenter;
 class MoviesPresenter extends BasePresenterImpl<MainContract.View>
         implements Presenter {
     private final Model model;
-    private final DefaultInternetChecker internetChecker;
+    private final InternetChecker internetChecker;
     private final MessagesProvider messagesProvider;
     private final Disposable disposable = Disposables.disposed();
 
     MoviesPresenter(
-            Model model, DefaultInternetChecker internetChecker,
+            Model model,
+            InternetChecker internetChecker,
             MessagesProvider messagesProvider
     ) {
         this.model = model;
