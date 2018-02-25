@@ -3,8 +3,8 @@ package com.example.edvblk.popularmoviesadnd.base;
 import android.app.Application;
 import android.content.Context;
 
-import com.example.edvblk.popularmoviesadnd.utils.GlideImageLoader;
 import com.example.edvblk.popularmoviesadnd.utils.RetrofitFactory;
+import com.example.edvblk.popularmoviesadnd.utils.image.GlideImageLoader;
 
 import retrofit2.Retrofit;
 
