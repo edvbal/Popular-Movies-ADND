@@ -5,9 +5,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 
 import com.example.edvblk.popularmoviesadnd.base.BaseApplication;
-
-import java.util.Arrays;
-import java.util.List;
+import com.example.edvblk.popularmoviesadnd.base.BaseImageLoader;
+import com.example.edvblk.popularmoviesadnd.utils.MoviesService;
+import com.example.edvblk.popularmoviesadnd.utils.image.DefaultImageUrlProvider;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -27,27 +27,32 @@ public class MoviesActivity extends AppCompatActivity implements View {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        initFields();
+        presenter.onCreate();
+    }
+
+    private void initFields() {
         unbinder = ButterKnife.bind(this);
         initPresenter();
+        initAdapter();
         initRecycler();
-        presenter.onCreate();
-        setFakeItems();
     }
 
     private void initPresenter() {
-        presenter = new MoviesPresenter();
+        MoviesService service = BaseApplication.getRetrofit(this).create(MoviesService.class);
+        MoviesModel model = new MoviesModel(service);
+        presenter = new MoviesPresenter(model);
         presenter.takeView(this);
     }
 
-    private void setFakeItems() {
-        List<Movie> movies = Arrays.asList(
-                new Movie("https://media3.giphy.com/media/3oKIPvR5gGtrCXMzYY/200w.webp"),
-                new Movie("https://media3.giphy.com/media/xT1R9ChQiaw6XfDa48/200w.webp"));
-        adapter.setItems(movies);
+    private void initAdapter() {
+        BaseImageLoader imageLoader = BaseApplication.getImageLoader(this);
+        int widthPixels = getResources().getDisplayMetrics().widthPixels;
+        DefaultImageUrlProvider urlProvider = new DefaultImageUrlProvider(widthPixels);
+        adapter = new MoviesAdapter(imageLoader, urlProvider);
     }
 
     private void initRecycler() {
-        adapter = new MoviesAdapter(BaseApplication.getImageLoader(this));
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
     }
