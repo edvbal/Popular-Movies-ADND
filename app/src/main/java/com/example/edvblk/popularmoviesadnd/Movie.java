@@ -1,13 +1,16 @@
 package com.example.edvblk.popularmoviesadnd;
 
-public class Movie {
-    private final String imageUrl;
+import com.google.gson.annotations.SerializedName;
 
-    public Movie(String imageUrl) {
-        this.imageUrl = imageUrl;
+public class Movie {
+    @SerializedName("poster_path")
+    private final String posterPath;
+
+    public Movie(String posterPath) {
+        this.posterPath = posterPath;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public String getPosterPath() {
+        return posterPath;
     }
 }
