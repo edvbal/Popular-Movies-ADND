@@ -5,7 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.edvblk.popularmoviesadnd.base.BaseImageLoader;
+import com.example.edvblk.popularmoviesadnd.utils.image.ImageLoader;
 import com.example.edvblk.popularmoviesadnd.utils.image.ImageUrlProvider;
 
 import java.util.ArrayList;
@@ -13,11 +13,11 @@ import java.util.List;
 
 public class MoviesAdapter extends RecyclerView.Adapter<MoviesViewHolder> {
     private final List<Movie> items = new ArrayList<>();
-    private final BaseImageLoader baseImageLoader;
+    private final ImageLoader imageLoader;
     private final ImageUrlProvider imageUrlProvider;
 
-    public MoviesAdapter(BaseImageLoader baseImageLoader, ImageUrlProvider imageUrlProvider) {
-        this.baseImageLoader = baseImageLoader;
+    public MoviesAdapter(ImageLoader imageLoader, ImageUrlProvider imageUrlProvider) {
+        this.imageLoader = imageLoader;
         this.imageUrlProvider = imageUrlProvider;
     }
 
@@ -25,7 +25,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesViewHolder> {
     public MoviesViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View itemView = inflater.inflate(R.layout.item_movie, parent, false);
-        return new MoviesViewHolder(itemView, baseImageLoader, imageUrlProvider);
+        return new MoviesViewHolder(itemView, imageLoader, imageUrlProvider);
     }
 
     @Override

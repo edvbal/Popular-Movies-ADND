@@ -6,9 +6,8 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
-import com.example.edvblk.popularmoviesadnd.base.BaseImageLoader;
 
-public class GlideImageLoader implements BaseImageLoader {
+public class GlideImageLoader implements ImageLoader {
     private final RequestManager requestManager;
 
     public GlideImageLoader(Context context) {
