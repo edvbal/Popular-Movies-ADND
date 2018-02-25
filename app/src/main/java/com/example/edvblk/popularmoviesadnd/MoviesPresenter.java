@@ -3,7 +3,7 @@ package com.example.edvblk.popularmoviesadnd;
 import com.example.edvblk.popularmoviesadnd.base.BasePresenterImpl;
 import com.example.edvblk.popularmoviesadnd.utils.network.InternetChecker;
 
-import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.Scheduler;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.disposables.Disposables;
 
@@ -16,15 +16,18 @@ class MoviesPresenter extends BasePresenterImpl<MainContract.View>
     private final InternetChecker internetChecker;
     private final MessagesProvider messagesProvider;
     private final Disposable disposable = Disposables.disposed();
+    private final Scheduler scheduler;
 
     MoviesPresenter(
             Model model,
             InternetChecker internetChecker,
-            MessagesProvider messagesProvider
+            MessagesProvider messagesProvider,
+            Scheduler scheduler
     ) {
         this.model = model;
         this.internetChecker = internetChecker;
         this.messagesProvider = messagesProvider;
+        this.scheduler = scheduler;
     }
 
     @Override
@@ -36,7 +39,7 @@ class MoviesPresenter extends BasePresenterImpl<MainContract.View>
             return;
         }
         model.getMovies()
-                .observeOn(AndroidSchedulers.mainThread())
+                .observeOn(scheduler)
                 .subscribe(movies -> onView(
                         view -> view.populateView(movies.getResult())
                 ), throwable -> onView(

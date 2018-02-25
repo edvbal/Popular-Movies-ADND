@@ -6,6 +6,7 @@ import com.example.edvblk.popularmoviesadnd.base.BaseApplication;
 import com.example.edvblk.popularmoviesadnd.utils.network.DefaultInternetChecker;
 import com.example.edvblk.popularmoviesadnd.utils.network.MoviesService;
 
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import retrofit2.Retrofit;
 
 class MoviesPresenterFactory {
@@ -14,6 +15,11 @@ class MoviesPresenterFactory {
         MoviesService service = retrofit.create(MoviesService.class);
         DefaultInternetChecker internetChecker = new DefaultInternetChecker(context);
         MessagesProviderImpl messagesProvider = new MessagesProviderImpl(context.getResources());
-        return new MoviesPresenter(new MoviesModel(service), internetChecker, messagesProvider);
+        return new MoviesPresenter(
+                new MoviesModel(service),
+                internetChecker,
+                messagesProvider,
+                AndroidSchedulers.mainThread()
+        );
     }
 }
