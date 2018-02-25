@@ -1,4 +1,4 @@
-package com.example.edvblk.popularmoviesadnd.utils;
+package com.example.edvblk.popularmoviesadnd.utils.image;
 
 import android.content.Context;
 import android.view.View;
@@ -17,6 +17,8 @@ public class GlideImageLoader implements BaseImageLoader {
 
     @Override
     public void loadImageFromUrl(View view, String url) {
-        requestManager.load(url).into((ImageView) view);
+        requestManager
+                .load(url)
+                .into((ImageView) view);
     }
 }

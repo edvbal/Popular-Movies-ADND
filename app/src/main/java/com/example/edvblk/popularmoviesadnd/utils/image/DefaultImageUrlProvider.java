@@ -1,9 +1,11 @@
-package com.example.edvblk.popularmoviesadnd;
+package com.example.edvblk.popularmoviesadnd.utils.image;
 
-class DefaultImageUrlProvider implements ImageUrlProvider {
+import com.example.edvblk.popularmoviesadnd.BuildConfig;
+
+public class DefaultImageUrlProvider implements ImageUrlProvider {
     private final int width;
 
-    DefaultImageUrlProvider(int width) {
+    public DefaultImageUrlProvider(int width) {
         this.width = width;
     }
 
