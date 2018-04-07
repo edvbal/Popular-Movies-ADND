@@ -20,7 +20,7 @@ public class MoviesPresenter extends BasePresenterImpl<MainContract.View>
     private final Scheduler scheduler;
     private Disposable disposable = Disposables.disposed();
 
-    MoviesPresenter(
+    public MoviesPresenter(
             Model model,
             InternetChecker internetChecker,
             MessagesProvider messagesProvider,

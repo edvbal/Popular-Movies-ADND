@@ -12,7 +12,7 @@ import io.reactivex.Single;
 public class MoviesModel implements MainContract.Model {
     private final MoviesService service;
 
-    MoviesModel(MoviesService service) {
+    public MoviesModel(MoviesService service) {
         this.service = service;
     }
 
