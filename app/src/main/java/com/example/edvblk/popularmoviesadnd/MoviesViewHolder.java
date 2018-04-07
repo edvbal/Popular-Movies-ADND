@@ -4,13 +4,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.example.edvblk.popularmoviesadnd.base.BaseViewHolder;
 import com.example.edvblk.popularmoviesadnd.utils.image.ImageLoader;
 import com.example.edvblk.popularmoviesadnd.utils.image.ImageUrlProvider;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-class MoviesViewHolder extends RecyclerView.ViewHolder {
+class MoviesViewHolder extends BaseViewHolder<Movie> {
     @BindView(R.id.imageView)
     ImageView imageView;
     private final ImageLoader imageLoader;
