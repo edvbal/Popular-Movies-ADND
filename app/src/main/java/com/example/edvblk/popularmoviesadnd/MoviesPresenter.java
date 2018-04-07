@@ -15,8 +15,8 @@ class MoviesPresenter extends BasePresenterImpl<MainContract.View>
     private final Model model;
     private final InternetChecker internetChecker;
     private final MessagesProvider messagesProvider;
-    private final Disposable disposable = Disposables.disposed();
     private final Scheduler scheduler;
+    private Disposable disposable = Disposables.disposed();
 
     MoviesPresenter(
             Model model,
@@ -33,12 +33,10 @@ class MoviesPresenter extends BasePresenterImpl<MainContract.View>
     @Override
     public void onCreate() {
         if (!internetChecker.isInternetAvailable()) {
-            onView(view -> {
-                view.showError(messagesProvider.provideNetworkErrorMessage());
-            });
+            onView(view -> view.showError(messagesProvider.provideNetworkErrorMessage()));
             return;
         }
-        model.getMovies()
+        disposable = model.getMovies()
                 .observeOn(scheduler)
                 .subscribe(movies -> onView(
                         view -> view.populateView(movies.getResult())
