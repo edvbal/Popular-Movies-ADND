@@ -1,9 +1,14 @@
-package com.example.edvblk.popularmoviesadnd;
+package com.example.edvblk.popularmoviesadnd.main;
 
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 
+import com.example.edvblk.popularmoviesadnd.MainContract;
+import com.example.edvblk.popularmoviesadnd.Movie;
+import com.example.edvblk.popularmoviesadnd.R;
 import com.example.edvblk.popularmoviesadnd.base.BaseActivity;
+import com.example.edvblk.popularmoviesadnd.main.MoviesAdapter;
+import com.example.edvblk.popularmoviesadnd.main.MoviesPresenterFactory;
 import com.example.edvblk.popularmoviesadnd.utils.ErrorProvider;
 import com.example.edvblk.popularmoviesadnd.utils.ErrorProviderImpl;
 import com.example.edvblk.popularmoviesadnd.utils.image.DefaultImageUrlProvider;

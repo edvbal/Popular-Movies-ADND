@@ -1,5 +1,7 @@
-package com.example.edvblk.popularmoviesadnd;
+package com.example.edvblk.popularmoviesadnd.main;
 
+import com.example.edvblk.popularmoviesadnd.MainContract;
+import com.example.edvblk.popularmoviesadnd.MessagesProvider;
 import com.example.edvblk.popularmoviesadnd.base.BasePresenterImpl;
 import com.example.edvblk.popularmoviesadnd.utils.network.InternetChecker;
 
@@ -10,7 +12,7 @@ import io.reactivex.disposables.Disposables;
 import static com.example.edvblk.popularmoviesadnd.MainContract.Model;
 import static com.example.edvblk.popularmoviesadnd.MainContract.Presenter;
 
-class MoviesPresenter extends BasePresenterImpl<MainContract.View>
+public class MoviesPresenter extends BasePresenterImpl<MainContract.View>
         implements Presenter {
     private final Model model;
     private final InternetChecker internetChecker;

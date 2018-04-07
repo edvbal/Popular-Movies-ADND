@@ -1,15 +1,15 @@
-package com.example.edvblk.popularmoviesadnd;
+package com.example.edvblk.popularmoviesadnd.main;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.edvblk.popularmoviesadnd.Movie;
+import com.example.edvblk.popularmoviesadnd.R;
 import com.example.edvblk.popularmoviesadnd.base.BaseAdapter;
+import com.example.edvblk.popularmoviesadnd.utils.ItemClickListener;
 import com.example.edvblk.popularmoviesadnd.utils.image.ImageLoader;
 import com.example.edvblk.popularmoviesadnd.utils.image.ImageUrlProvider;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class MoviesAdapter extends BaseAdapter {
     private final ImageLoader imageLoader;
