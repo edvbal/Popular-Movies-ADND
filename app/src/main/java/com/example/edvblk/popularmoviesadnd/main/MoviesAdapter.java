@@ -11,7 +11,7 @@ import com.example.edvblk.popularmoviesadnd.utils.ItemClickListener;
 import com.example.edvblk.popularmoviesadnd.utils.image.ImageLoader;
 import com.example.edvblk.popularmoviesadnd.utils.image.ImageUrlProvider;
 
-public class MoviesAdapter extends BaseAdapter {
+public class MoviesAdapter extends BaseAdapter<Movie> {
     private final ImageLoader imageLoader;
     private final ImageUrlProvider imageUrlProvider;
     private ItemClickListener<Movie> listener;
