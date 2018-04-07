@@ -7,8 +7,7 @@ import com.example.edvblk.popularmoviesadnd.MainContract;
 import com.example.edvblk.popularmoviesadnd.Movie;
 import com.example.edvblk.popularmoviesadnd.R;
 import com.example.edvblk.popularmoviesadnd.base.BaseActivity;
-import com.example.edvblk.popularmoviesadnd.main.MoviesAdapter;
-import com.example.edvblk.popularmoviesadnd.main.MoviesPresenterFactory;
+import com.example.edvblk.popularmoviesadnd.details.MovieDetailsActivity;
 import com.example.edvblk.popularmoviesadnd.utils.ErrorProvider;
 import com.example.edvblk.popularmoviesadnd.utils.ErrorProviderImpl;
 import com.example.edvblk.popularmoviesadnd.utils.image.DefaultImageUrlProvider;
@@ -54,7 +53,10 @@ public class MoviesActivity extends BaseActivity implements MainContract.View {
     private void initAdapter() {
         int widthPixels = getResources().getDisplayMetrics().widthPixels;
         DefaultImageUrlProvider urlProvider = new DefaultImageUrlProvider(widthPixels);
-        adapter = new MoviesAdapter(new GlideImageLoader(this), urlProvider);
+        adapter = new MoviesAdapter(
+                new GlideImageLoader(this),
+                urlProvider,
+                item -> presenter.onItemSelected(item));
     }
 
     private void initRecycler() {
@@ -72,6 +74,10 @@ public class MoviesActivity extends BaseActivity implements MainContract.View {
         errorProvider.showError(errorMessage);
     }
 
+    @Override
+    public void openDetailsActivity(Movie item) {
+        MovieDetailsActivity.start(this);
+    }
 
     @Override
     protected void onDestroy() {

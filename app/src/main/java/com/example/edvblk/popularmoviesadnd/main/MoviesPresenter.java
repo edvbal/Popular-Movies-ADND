@@ -2,6 +2,7 @@ package com.example.edvblk.popularmoviesadnd.main;
 
 import com.example.edvblk.popularmoviesadnd.MainContract;
 import com.example.edvblk.popularmoviesadnd.MessagesProvider;
+import com.example.edvblk.popularmoviesadnd.Movie;
 import com.example.edvblk.popularmoviesadnd.base.BasePresenterImpl;
 import com.example.edvblk.popularmoviesadnd.utils.network.InternetChecker;
 
@@ -44,6 +45,11 @@ public class MoviesPresenter extends BasePresenterImpl<MainContract.View>
                         view -> view.populateView(movies.getResult())
                 ), throwable -> onView(
                         view -> view.showError(messagesProvider.provideRequestErrorMessage())));
+    }
+
+    @Override
+    public void onItemSelected(Movie item) {
+        onView(view -> view.openDetailsActivity(item));
     }
 
     @Override

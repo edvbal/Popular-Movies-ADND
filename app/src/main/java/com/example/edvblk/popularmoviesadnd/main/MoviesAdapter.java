@@ -14,16 +14,22 @@ import com.example.edvblk.popularmoviesadnd.utils.image.ImageUrlProvider;
 public class MoviesAdapter extends BaseAdapter {
     private final ImageLoader imageLoader;
     private final ImageUrlProvider imageUrlProvider;
+    private ItemClickListener<Movie> listener;
 
-    public MoviesAdapter(ImageLoader imageLoader, ImageUrlProvider imageUrlProvider) {
+    public MoviesAdapter(
+            ImageLoader imageLoader,
+            ImageUrlProvider imageUrlProvider,
+            ItemClickListener<Movie> listener
+    ) {
         this.imageLoader = imageLoader;
         this.imageUrlProvider = imageUrlProvider;
+        this.listener = listener;
     }
 
     @Override
     public MoviesViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View itemView = inflater.inflate(R.layout.item_movie, parent, false);
-        return new MoviesViewHolder(itemView, imageLoader, imageUrlProvider);
+        return new MoviesViewHolder(itemView, imageLoader, imageUrlProvider, listener);
     }
 }

@@ -12,10 +12,14 @@ public interface MainContract {
         void populateView(List<Movie> movies);
 
         void showError(String errorMessage);
+
+        void openDetailsActivity(Movie item);
     }
 
     interface Presenter extends BasePresenter<View> {
         void onCreate();
+
+        void onItemSelected(Movie item);
     }
 
     interface Model {

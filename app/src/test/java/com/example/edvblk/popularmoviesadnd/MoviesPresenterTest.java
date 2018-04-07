@@ -111,6 +111,15 @@ public class MoviesPresenterTest {
     }
 
     @Test
+    public void onItemSelected_callView() {
+        Movie movie = new Movie("posterPath");
+
+        presenter.onItemSelected(movie);
+
+        verify(view).openDetailsActivity(movie);
+    }
+
+    @Test
     public void dropView_viewsAreNotCalled() {
         presenter.onCreate();
         presenter.dropView();
