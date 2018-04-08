@@ -2,6 +2,7 @@ package com.example.edvblk.popularmoviesadnd.main;
 
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 
 import com.example.edvblk.popularmoviesadnd.MainContract;
 import com.example.edvblk.popularmoviesadnd.Movie;
@@ -22,6 +23,8 @@ import static com.example.edvblk.popularmoviesadnd.MainContract.Presenter;
 public class MoviesActivity extends BaseActivity implements MainContract.View {
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
     private MoviesAdapter adapter;
     private Presenter presenter;
     private ErrorProvider errorProvider;
@@ -30,6 +33,7 @@ public class MoviesActivity extends BaseActivity implements MainContract.View {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initFields();
+        setSupportActionBar(toolbar);
         presenter.onCreate();
     }
 
@@ -76,7 +80,7 @@ public class MoviesActivity extends BaseActivity implements MainContract.View {
 
     @Override
     public void openDetailsActivity(Movie item) {
-        MovieDetailsActivity.start(this);
+        MovieDetailsActivity.start(this, item);
     }
 
     @Override

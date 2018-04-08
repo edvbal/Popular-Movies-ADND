@@ -112,7 +112,7 @@ public class MoviesPresenterTest {
 
     @Test
     public void onItemSelected_callView() {
-        Movie movie = new Movie("posterPath");
+        Movie movie = new Movie("posterPath", releaseDate, averageVote, overView, title);
 
         presenter.onItemSelected(movie);
 
