@@ -32,7 +32,7 @@ class AuthorizationInterceptor implements Interceptor {
     private HttpUrl getUrlWithAuthorizationParameter(Request originalRequest) {
         return originalRequest.url()
                 .newBuilder()
-                .setQueryParameter(AUTHORIZATION_PARAMETER, BuildConfig.MOVIES_SERVICE_API_KEY)
+                .setQueryParameter(AUTHORIZATION_PARAMETER, BuildConfig.API_KEY)
                 .build();
     }
 }

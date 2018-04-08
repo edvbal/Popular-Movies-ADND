@@ -24,6 +24,6 @@ public class DefaultImageUrlProvider implements ImageUrlProvider {
             widthPath = "/w500";
         else
             widthPath = "/w780";
-        return BuildConfig.MOVIES_IMAGES_BASE_URL + widthPath + posterPath;
+        return BuildConfig.IMAGES_BASE_URL + widthPath + posterPath;
     }
 }

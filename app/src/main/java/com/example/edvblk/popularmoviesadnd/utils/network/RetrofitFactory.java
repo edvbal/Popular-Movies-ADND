@@ -18,7 +18,7 @@ public class RetrofitFactory implements BaseFactory<Retrofit> {
         RxJava2CallAdapterFactory scheduler
                 = RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io());
         return new Retrofit.Builder()
-                .baseUrl(BuildConfig.MOVIES_SERVICE_BASE_URL)
+                .baseUrl(BuildConfig.API_BASE_URL)
                 .addCallAdapterFactory(scheduler)
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(provideHttpClient())
