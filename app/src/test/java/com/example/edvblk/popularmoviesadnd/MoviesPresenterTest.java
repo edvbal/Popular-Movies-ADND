@@ -1,6 +1,8 @@
 package com.example.edvblk.popularmoviesadnd;
 
+import com.example.edvblk.popularmoviesadnd.main.Movie;
 import com.example.edvblk.popularmoviesadnd.main.MoviesPresenter;
+import com.example.edvblk.popularmoviesadnd.utils.MessagesProvider;
 import com.example.edvblk.popularmoviesadnd.utils.network.InternetChecker;
 import com.example.edvblk.popularmoviesadnd.utils.network.MoviesResultResponse;
 
@@ -13,8 +15,8 @@ import java.util.List;
 import io.reactivex.Single;
 import io.reactivex.schedulers.TestScheduler;
 
-import static com.example.edvblk.popularmoviesadnd.MainContract.Model;
-import static com.example.edvblk.popularmoviesadnd.MainContract.View;
+import static com.example.edvblk.popularmoviesadnd.main.MainContract.Model;
+import static com.example.edvblk.popularmoviesadnd.main.MainContract.View;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyZeroInteractions;
@@ -43,7 +45,7 @@ public class MoviesPresenterTest {
         when(messagesProvider.provideNetworkErrorMessage()).thenReturn(DEFAULT_ERROR_MESSAGE);
         when(messagesProvider.provideRequestErrorMessage()).thenReturn(DEFAULT_ERROR_MESSAGE);
         when(internetChecker.isInternetAvailable()).thenReturn(true);
-        when(model.getMovies()).thenReturn(Single.just(moviesResponse));
+        when(model.getPopularMovies()).thenReturn(Single.just(moviesResponse));
     }
 
     @Test
@@ -76,7 +78,7 @@ public class MoviesPresenterTest {
         scheduler.triggerActions();
 
 
-        verify(model).getMovies();
+        verify(model).getPopularMovies();
     }
 
     @Test
@@ -101,7 +103,7 @@ public class MoviesPresenterTest {
 
     @Test
     public void onCreate_failureResponse_callsViewShowErrorWithProvidedMessage() {
-        when(model.getMovies()).thenReturn(Single.error(new RuntimeException()));
+        when(model.getPopularMovies()).thenReturn(Single.error(new RuntimeException()));
 
         presenter.onCreate();
         scheduler.triggerActions();

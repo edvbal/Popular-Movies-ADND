@@ -2,10 +2,8 @@ package com.example.edvblk.popularmoviesadnd.main;
 
 import android.content.Context;
 
-import com.example.edvblk.popularmoviesadnd.MessagesProviderImpl;
+import com.example.edvblk.popularmoviesadnd.utils.MessagesProviderImpl;
 import com.example.edvblk.popularmoviesadnd.base.BaseApplication;
-import com.example.edvblk.popularmoviesadnd.main.MoviesModel;
-import com.example.edvblk.popularmoviesadnd.main.MoviesPresenter;
 import com.example.edvblk.popularmoviesadnd.utils.network.DefaultInternetChecker;
 import com.example.edvblk.popularmoviesadnd.utils.network.MoviesService;
 

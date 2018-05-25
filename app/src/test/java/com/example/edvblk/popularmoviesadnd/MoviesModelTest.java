@@ -14,8 +14,8 @@ public class MoviesModelTest {
         MoviesService service = mock(MoviesService.class);
         MoviesModel model = new MoviesModel(service);
 
-        model.getMovies();
+        model.getPopularMovies();
 
-        verify(service).getMovies();
+        verify(service).getMoviesSortedByPopularity();
     }
 }

@@ -3,7 +3,6 @@ package com.example.edvblk.popularmoviesadnd.main;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.example.edvblk.popularmoviesadnd.Movie;
 import com.example.edvblk.popularmoviesadnd.R;
 import com.example.edvblk.popularmoviesadnd.base.BaseViewHolder;
 import com.example.edvblk.popularmoviesadnd.utils.ItemClickListener;

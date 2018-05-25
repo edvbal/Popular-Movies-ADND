@@ -1,4 +1,4 @@
-package com.example.edvblk.popularmoviesadnd;
+package com.example.edvblk.popularmoviesadnd.main;
 
 import android.os.Parcel;
 import android.os.Parcelable;

@@ -1,17 +1,14 @@
 package com.example.edvblk.popularmoviesadnd.main;
 
-import com.example.edvblk.popularmoviesadnd.MainContract;
-import com.example.edvblk.popularmoviesadnd.MessagesProvider;
-import com.example.edvblk.popularmoviesadnd.Movie;
+import com.example.edvblk.popularmoviesadnd.utils.MessagesProvider;
 import com.example.edvblk.popularmoviesadnd.base.BasePresenterImpl;
 import com.example.edvblk.popularmoviesadnd.utils.network.InternetChecker;
 
 import io.reactivex.Scheduler;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.disposables.Disposables;
+import io.reactivex.disposables.CompositeDisposable;
 
-import static com.example.edvblk.popularmoviesadnd.MainContract.Model;
-import static com.example.edvblk.popularmoviesadnd.MainContract.Presenter;
+import static com.example.edvblk.popularmoviesadnd.main.MainContract.Model;
+import static com.example.edvblk.popularmoviesadnd.main.MainContract.Presenter;
 
 public class MoviesPresenter extends BasePresenterImpl<MainContract.View>
         implements Presenter {
@@ -19,7 +16,7 @@ public class MoviesPresenter extends BasePresenterImpl<MainContract.View>
     private final InternetChecker internetChecker;
     private final MessagesProvider messagesProvider;
     private final Scheduler scheduler;
-    private Disposable disposable = Disposables.disposed();
+    private CompositeDisposable disposables = new CompositeDisposable();
 
     public MoviesPresenter(
             Model model,
@@ -39,12 +36,13 @@ public class MoviesPresenter extends BasePresenterImpl<MainContract.View>
             onView(view -> view.showError(messagesProvider.provideNetworkErrorMessage()));
             return;
         }
-        disposable = model.getMovies()
+        disposables.add(model.getPopularMovies()
                 .observeOn(scheduler)
-                .subscribe(movies -> onView(
-                        view -> view.populateView(movies.getResult())
-                ), throwable -> onView(
-                        view -> view.showError(messagesProvider.provideRequestErrorMessage())));
+                .subscribe(movies ->
+                        onView(view -> view.populateView(movies.getResult())
+                        ), throwable -> onView(
+                        view -> view.showError(messagesProvider.provideRequestErrorMessage())
+                )));
     }
 
     @Override
@@ -53,8 +51,30 @@ public class MoviesPresenter extends BasePresenterImpl<MainContract.View>
     }
 
     @Override
+    public void onHighestRatedClicked() {
+        disposables.add(model.getHighestRatedMovies()
+                .observeOn(scheduler)
+                .subscribe(movies -> {
+                    onView(view -> view.populateView(movies.getResult()));
+                }, throwable -> onView(view ->
+                        view.showError(messagesProvider.provideNetworkErrorMessage())
+                )));
+    }
+
+    @Override
+    public void onPopularClicked() {
+        disposables.add(model.getPopularMovies()
+                .observeOn(scheduler)
+                .subscribe(movies -> {
+                    onView(view -> view.populateView(movies.getResult()));
+                }, throwable -> onView(view ->
+                        view.showError(messagesProvider.provideNetworkErrorMessage())
+                )));
+    }
+
+    @Override
     public void dropView() {
-        disposable.dispose();
+        disposables.dispose();
         super.dropView();
     }
 }

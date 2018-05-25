@@ -1,6 +1,8 @@
-package com.example.edvblk.popularmoviesadnd;
+package com.example.edvblk.popularmoviesadnd.utils;
 
 import android.content.res.Resources;
+
+import com.example.edvblk.popularmoviesadnd.R;
 
 public class MessagesProviderImpl implements MessagesProvider {
     private final Resources resources;

@@ -3,9 +3,9 @@ package com.example.edvblk.popularmoviesadnd.main;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 
-import com.example.edvblk.popularmoviesadnd.MainContract;
-import com.example.edvblk.popularmoviesadnd.Movie;
 import com.example.edvblk.popularmoviesadnd.R;
 import com.example.edvblk.popularmoviesadnd.base.BaseActivity;
 import com.example.edvblk.popularmoviesadnd.details.MovieDetailsActivity;
@@ -18,7 +18,7 @@ import java.util.List;
 
 import butterknife.BindView;
 
-import static com.example.edvblk.popularmoviesadnd.MainContract.Presenter;
+import static com.example.edvblk.popularmoviesadnd.main.MainContract.Presenter;
 
 public class MoviesActivity extends BaseActivity implements MainContract.View {
     @BindView(R.id.recyclerView)
@@ -52,6 +52,22 @@ public class MoviesActivity extends BaseActivity implements MainContract.View {
     private void initPresenter() {
         presenter = new MoviesPresenterFactory().create(this);
         presenter.takeView(this);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.menu_item_highest_rated) {
+            presenter.onHighestRatedClicked();
+        } else if (item.getItemId() == R.id.menu_item_most_popular) {
+            presenter.onPopularClicked();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void initAdapter() {

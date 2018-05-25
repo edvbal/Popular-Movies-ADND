@@ -1,4 +1,4 @@
-package com.example.edvblk.popularmoviesadnd;
+package com.example.edvblk.popularmoviesadnd.utils;
 
 public interface MessagesProvider {
     String provideNetworkErrorMessage();

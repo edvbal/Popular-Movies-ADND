@@ -1,4 +1,4 @@
-package com.example.edvblk.popularmoviesadnd;
+package com.example.edvblk.popularmoviesadnd.main;
 
 import com.example.edvblk.popularmoviesadnd.base.BasePresenter;
 import com.example.edvblk.popularmoviesadnd.utils.network.MoviesResultResponse;
@@ -20,9 +20,15 @@ public interface MainContract {
         void onCreate();
 
         void onItemSelected(Movie item);
+
+        void onHighestRatedClicked();
+
+        void onPopularClicked();
     }
 
     interface Model {
-        Single<MoviesResultResponse<List<Movie>>> getMovies();
+        Single<MoviesResultResponse<List<Movie>>> getPopularMovies();
+
+        Single<MoviesResultResponse<List<Movie>>> getHighestRatedMovies();
     }
 }

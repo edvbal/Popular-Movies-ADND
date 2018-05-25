@@ -10,6 +10,8 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         buildConfigField "String", "API_BASE_URL", THE_MOVIE_DB_BASE_URL
+        buildConfigField "String", "HIGHEST_RATED_MOVIES", THE_MOVIE_DB_SORT_RATINGS
+        buildConfigField "String", "POPULAR_MOVIES", THE_MOVIE_DB_SORT_POPULARITY
         buildConfigField "String", "IMAGES_BASE_URL", THE_MOVIE_DB_IMAGES_BASE_URL
         buildConfigField "String", "API_KEY", THE_MOVIE_DB_API_KEY
         buildConfigField "String", "API_VERSION", THE_MOVIE_DB_API_VERSION

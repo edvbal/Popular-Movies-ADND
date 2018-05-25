@@ -1,7 +1,5 @@
 package com.example.edvblk.popularmoviesadnd.main;
 
-import com.example.edvblk.popularmoviesadnd.MainContract;
-import com.example.edvblk.popularmoviesadnd.Movie;
 import com.example.edvblk.popularmoviesadnd.utils.network.MoviesResultResponse;
 import com.example.edvblk.popularmoviesadnd.utils.network.MoviesService;
 
@@ -17,7 +15,12 @@ public class MoviesModel implements MainContract.Model {
     }
 
     @Override
-    public Single<MoviesResultResponse<List<Movie>>> getMovies() {
-        return service.getMovies();
+    public Single<MoviesResultResponse<List<Movie>>> getPopularMovies() {
+        return service.getPopularMovies();
+    }
+
+    @Override
+    public Single<MoviesResultResponse<List<Movie>>> getHighestRatedMovies() {
+        return service.getHighestRatedMovies();
     }
 }

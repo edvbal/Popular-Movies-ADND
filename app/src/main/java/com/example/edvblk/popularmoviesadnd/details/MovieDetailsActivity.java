@@ -9,7 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.edvblk.popularmoviesadnd.Movie;
+import com.example.edvblk.popularmoviesadnd.main.Movie;
 import com.example.edvblk.popularmoviesadnd.R;
 import com.example.edvblk.popularmoviesadnd.base.BaseActivity;
 import com.example.edvblk.popularmoviesadnd.utils.image.DefaultImageUrlProvider;
