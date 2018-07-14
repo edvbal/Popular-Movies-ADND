@@ -3,5 +3,7 @@ package com.example.edvblk.popularmoviesadnd.utils;
 public interface MessagesProvider {
     String provideNetworkErrorMessage();
 
-    String provideRequestErrorMessage();
+    String provideEmptyMoviesListMessage();
+
+    String provideEmptyMovieDetailsMessage();
 }

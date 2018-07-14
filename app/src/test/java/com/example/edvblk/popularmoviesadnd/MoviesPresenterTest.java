@@ -43,7 +43,7 @@ public class MoviesPresenterTest {
         presenter = new MoviesPresenter(model, internetChecker, messagesProvider, scheduler);
         presenter.takeView(view);
         when(messagesProvider.provideNetworkErrorMessage()).thenReturn(DEFAULT_ERROR_MESSAGE);
-        when(messagesProvider.provideRequestErrorMessage()).thenReturn(DEFAULT_ERROR_MESSAGE);
+        when(messagesProvider.provideEmptyMoviesListMessage()).thenReturn(DEFAULT_ERROR_MESSAGE);
         when(internetChecker.isInternetAvailable()).thenReturn(true);
         when(model.getPopularMovies()).thenReturn(Single.just(moviesResponse));
     }
@@ -109,7 +109,7 @@ public class MoviesPresenterTest {
         scheduler.triggerActions();
 
 
-        verify(view).showError(messagesProvider.provideRequestErrorMessage());
+        verify(view).showError(messagesProvider.provideEmptyMoviesListMessage());
     }
 
     @Test

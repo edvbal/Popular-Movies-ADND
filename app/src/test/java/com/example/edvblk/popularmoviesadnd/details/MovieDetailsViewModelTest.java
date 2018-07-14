@@ -5,14 +5,14 @@ import org.junit.Test;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
-public class MovieDetailsPresenterTest {
+public class MovieDetailsViewModelTest {
     @Test
     public void onCreate_callsView() {
-        MovieDetailsPresenter presenter = new MovieDetailsPresenter();
+        MovieDetailsViewModel presenter = new MovieDetailsViewModel(messagesProvider);
         MovieDetailsContract.View view = mock(MovieDetailsContract.View.class);
         presenter.takeView(view);
 
-        presenter.onCreate();
+        presenter.onMovieSelected((Movie) extras.get(INTENT_EXTRA_KEY_MOVIE));
 
         verify(view).showMovieDetails();
     }

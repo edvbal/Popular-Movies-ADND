@@ -17,7 +17,12 @@ public class MessagesProviderImpl implements MessagesProvider {
     }
 
     @Override
-    public String provideRequestErrorMessage() {
-        return resources.getString(R.string.error_network_request_failure);
+    public String provideEmptyMoviesListMessage() {
+        return resources.getString(R.string.error_empty_movies_list);
+    }
+
+    @Override
+    public String provideEmptyMovieDetailsMessage() {
+        return resources.getString(R.string.error_empty_movies_list);
     }
 }

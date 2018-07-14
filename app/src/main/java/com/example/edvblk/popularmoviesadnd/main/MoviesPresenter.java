@@ -41,7 +41,7 @@ public class MoviesPresenter extends BasePresenterImpl<MainContract.View>
                 .subscribe(movies ->
                         onView(view -> view.populateView(movies.getResult())
                         ), throwable -> onView(
-                        view -> view.showError(messagesProvider.provideRequestErrorMessage())
+                        view -> view.showError(messagesProvider.provideEmptyMoviesListMessage())
                 )));
     }
 
