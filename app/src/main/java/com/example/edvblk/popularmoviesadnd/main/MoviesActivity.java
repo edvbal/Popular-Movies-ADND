@@ -1,16 +1,22 @@
 package com.example.edvblk.popularmoviesadnd.main;
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import com.example.edvblk.popularmoviesadnd.R;
 import com.example.edvblk.popularmoviesadnd.base.BaseActivity;
 import com.example.edvblk.popularmoviesadnd.details.MovieDetailsActivity;
 import com.example.edvblk.popularmoviesadnd.utils.ErrorProvider;
 import com.example.edvblk.popularmoviesadnd.utils.ErrorProviderImpl;
+import com.example.edvblk.popularmoviesadnd.utils.architecture.ViewModelState;
 import com.example.edvblk.popularmoviesadnd.utils.image.DefaultImageUrlProvider;
 import com.example.edvblk.popularmoviesadnd.utils.image.GlideImageLoader;
 
@@ -18,15 +24,17 @@ import java.util.List;
 
 import butterknife.BindView;
 
-import static com.example.edvblk.popularmoviesadnd.main.MainContract.Presenter;
+import static com.example.edvblk.popularmoviesadnd.main.MoviesViewModel.*;
 
-public class MoviesActivity extends BaseActivity implements MainContract.View {
+public class MoviesActivity extends BaseActivity {
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
+    @BindView(R.id.progressBar)
+    ProgressBar progressBar;
     private MoviesAdapter adapter;
-    private Presenter presenter;
+    private MoviesViewModel moviesViewModel;
     private ErrorProvider errorProvider;
 
     @Override
@@ -34,7 +42,39 @@ public class MoviesActivity extends BaseActivity implements MainContract.View {
         super.onCreate(savedInstanceState);
         initFields();
         setSupportActionBar(toolbar);
-        presenter.onCreate();
+        moviesViewModel.getState().observe(this, viewModelState -> {
+            if (viewModelState instanceof ViewModelState.ErrorState) {
+                showError((ViewModelState.ErrorState) viewModelState);
+            } else if (viewModelState instanceof ViewModelState.LoadingState) {
+                showLoadingBar((ViewModelState.LoadingState) viewModelState);
+            } else if (viewModelState instanceof MoviesViewModel.MoviesListState) {
+                showItems((MoviesViewModel.MoviesListState) viewModelState);
+            } else if (viewModelState instanceof MoviesViewModel.MovieDetailsState) {
+                showDetailsScreen((MoviesViewModel.MovieDetailsState) viewModelState);
+            }
+        });
+        moviesViewModel.loadMovies();
+    }
+
+    private void showLoadingBar(ViewModelState.LoadingState loadingState) {
+        if (loadingState.isLoading()) {
+            progressBar.setVisibility(View.VISIBLE);
+        } else {
+            progressBar.setVisibility(View.GONE);
+        }
+
+    }
+
+    private void showDetailsScreen(MoviesViewModel.MovieDetailsState detailsState) {
+        MovieDetailsActivity.start(this, detailsState.getMovie());
+    }
+
+    private void showItems(MoviesViewModel.MoviesListState viewModelState) {
+        adapter.setItems(viewModelState.getMovies());
+    }
+
+    private void showError(ViewModelState.ErrorState errorState) {
+        errorProvider.showError(errorState.getErrorMessage());
     }
 
     @Override
@@ -44,14 +84,14 @@ public class MoviesActivity extends BaseActivity implements MainContract.View {
 
     private void initFields() {
         errorProvider = new ErrorProviderImpl(recyclerView);
-        initPresenter();
+        initViewModel();
         initAdapter();
         initRecycler();
     }
 
-    private void initPresenter() {
-        presenter = new MoviesPresenterFactory().create(this);
-        presenter.takeView(this);
+    private void initViewModel() {
+        MoviesPresenterFactory factory = new MoviesPresenterFactory(this);
+        moviesViewModel = ViewModelProviders.of(this, factory).get(MoviesViewModel.class);
     }
 
     @Override
@@ -63,9 +103,9 @@ public class MoviesActivity extends BaseActivity implements MainContract.View {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.menu_item_highest_rated) {
-            presenter.onHighestRatedClicked();
+            moviesViewModel.loadHighestRated();
         } else if (item.getItemId() == R.id.menu_item_most_popular) {
-            presenter.onPopularClicked();
+            moviesViewModel.loadMostPopular();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -76,32 +116,11 @@ public class MoviesActivity extends BaseActivity implements MainContract.View {
         adapter = new MoviesAdapter(
                 new GlideImageLoader(this),
                 urlProvider,
-                item -> presenter.onItemSelected(item));
+                item -> moviesViewModel.onItemSelected(item));
     }
 
     private void initRecycler() {
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
-    }
-
-    @Override
-    public void populateView(List<Movie> movies) {
-        adapter.setItems(movies);
-    }
-
-    @Override
-    public void showError(String errorMessage) {
-        errorProvider.showError(errorMessage);
-    }
-
-    @Override
-    public void openDetailsActivity(Movie item) {
-        MovieDetailsActivity.start(this, item);
-    }
-
-    @Override
-    protected void onDestroy() {
-        presenter.dropView();
-        super.onDestroy();
     }
 }

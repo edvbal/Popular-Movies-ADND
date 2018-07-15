@@ -1,7 +1,7 @@
 package com.example.edvblk.popularmoviesadnd;
 
 import com.example.edvblk.popularmoviesadnd.main.Movie;
-import com.example.edvblk.popularmoviesadnd.main.MoviesPresenter;
+import com.example.edvblk.popularmoviesadnd.main.MoviesViewModel;
 import com.example.edvblk.popularmoviesadnd.utils.MessagesProvider;
 import com.example.edvblk.popularmoviesadnd.utils.network.InternetChecker;
 import com.example.edvblk.popularmoviesadnd.utils.network.MoviesResultResponse;
@@ -22,13 +22,13 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 
-public class MoviesPresenterTest {
+public class MoviesViewModelTest {
     private static final String DEFAULT_ERROR_MESSAGE = "errorMessage";
     private final List<Movie> moviesList = Arrays.asList(new Movie("link1"), new Movie("link2"));
     private final TestScheduler scheduler = new TestScheduler();
     private final MoviesResultResponse<List<Movie>> moviesResponse
             = new MoviesResultResponse<>(moviesList);
-    private MoviesPresenter presenter;
+    private MoviesViewModel presenter;
     private InternetChecker internetChecker;
     private View view;
     private MessagesProvider messagesProvider;
@@ -40,7 +40,7 @@ public class MoviesPresenterTest {
         model = mock(Model.class);
         internetChecker = mock(InternetChecker.class);
         messagesProvider = mock(MessagesProvider.class);
-        presenter = new MoviesPresenter(model, internetChecker, messagesProvider, scheduler);
+        presenter = new MoviesViewModel(model, service, internetChecker, messagesProvider, scheduler);
         presenter.takeView(view);
         when(messagesProvider.provideNetworkErrorMessage()).thenReturn(DEFAULT_ERROR_MESSAGE);
         when(messagesProvider.provideEmptyMoviesListMessage()).thenReturn(DEFAULT_ERROR_MESSAGE);
